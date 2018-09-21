@@ -1,0 +1,36 @@
+// $beige: #ffe0c7;
+$beige: #ffe6d1;
+$white: #ffffff;
+$black: #524f4c;
+$blue: #5c7aff;
+
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i');
+
+%font-space-mono {
+    font-family: 'Space Mono', monospace;
+    font-smooth: antialiased;
+}
+
+%font-normal {
+    @extend %font-space-mono;
+    font-weight: 400;
+    font-style: normal;
+}
+
+%font-italic {
+    @extend %font-space-mono;
+    font-weight: 400;
+    font-style: italic;
+}
+
+%font-bold {
+    @extend %font-space-mono;
+    font-weight: 700;
+    font-style: normal;
+}
+
+%font-bold-italic {
+    @extend %font-space-mono;
+    font-weight: 700;
+    font-style: italic;
+}

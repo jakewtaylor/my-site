@@ -1,0 +1,46 @@
+.album__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+
+    .album__title {
+        @extend %font-normal;
+        margin-bottom: 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .album {
+        display: flex;
+        align-items: center;
+
+        .album__art__container {
+            width: 5em;
+
+            .album__art {
+                display: block;
+                width: 100%;
+                border-radius: 4px;
+            }
+        }
+
+        .album__info {
+            display: inline-block;
+            padding-left: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
+
+            .album__song {
+                @extend %font-bold;
+            }
+
+            .album__artist {
+                @extend %font-normal;
+            }
+
+            .album__name {
+                @extend %font-italic;
+            }
+        }
+    }
+}
