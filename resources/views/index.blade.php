@@ -2,7 +2,9 @@
 
 @section('content')
     <section class="card">
-        <img src="/img/plant.jpg" alt="Plant" class="image">
+        <div class="image__container">
+            <img src="/img/plant.jpg" alt="Plant" class="image">
+        </div>
 
         <div class="card__inner">
             <h1 class="card__title">Jake Taylor</h1>

@@ -5,7 +5,11 @@
         <p class="album__title">i'm currently listening to</p>
         <div class="album">
             <div class="album__art__container">
-                <img src="{{ $currentlyPlaying->getAlbumArt() }}" class="album__art">
+                <img
+                    src="{{ $currentlyPlaying->getAlbumArt() }}"
+                    class="album__art"
+                    id="album__art"
+                >
             </div>
 
             <div class="album__info">
@@ -15,4 +19,6 @@
             </div>
         </div>
     </div>
+
+    <script src="/js/theme.js"></script>
 @endif

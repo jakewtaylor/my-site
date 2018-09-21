@@ -1,8 +1,10 @@
-// $beige: #ffe0c7;
-$beige: #ffe6d1;
-$white: #ffffff;
-$black: #524f4c;
-$blue: #5c7aff;
+:root {
+    --background: #ffe6d1;
+    --contrasting: #4f4f4f;
+    --white: #ffffff;
+    --black: #4f4f4f;
+    --primary: #5c7aff;
+}
 
 @import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i');
 

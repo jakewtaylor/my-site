@@ -1,5 +1,6 @@
 body {
-    background: $beige;
+    background: var(--background);
+    transition: background .2s;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,4 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i);.card .card__inner .card__content,
+@import url(https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i);:root {
+  --background: #ffe6d1;
+  --contrasting: #4f4f4f;
+  --white: #ffffff;
+  --black: #4f4f4f;
+  --primary: #5c7aff;
+}
+
+.card .card__inner .card__content,
 .album__container .album__title,
 .album__container .album .album__info .album__artist,
 .album__container .album .album__info .album__name,
@@ -47,11 +55,13 @@ html,
 body {
   height: 100%;
   font-size: 16px;
-  color: #524f4c;
+  color: var(--black);
 }
 
 body {
-  background: #ffe6d1;
+  background: var(--background);
+  -webkit-transition: background .2s;
+  transition: background .2s;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,18 +74,25 @@ body {
 }
 
 .card {
-  background: #ffffff;
+  background: var(--white);
   width: 50rem;
   height: 22rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-shadow: 6px 6px 0 #524f4c, 6px 8px 15px rgba(0, 0, 0, 0.4);
-          box-shadow: 6px 6px 0 #524f4c, 6px 8px 15px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 6px 6px 0 var(--black), 6px 8px 15px rgba(0, 0, 0, 0.4);
+          box-shadow: 6px 6px 0 var(--black), 6px 8px 15px rgba(0, 0, 0, 0.4);
 }
 
-.card .image {
+.card .image__container {
+  line-height: 0;
+  float: left;
+}
+
+.card .image__container .image {
   height: 100%;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
 }
 
 .card .card__inner {
@@ -94,7 +111,7 @@ body {
 }
 
 .card .card__inner .card__content a {
-  color: #5c7aff;
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -103,6 +120,7 @@ body {
   top: 0;
   left: 0;
   padding: 1rem;
+  color: var(--contrasting);
 }
 
 .album__container .album__title {
@@ -127,6 +145,8 @@ body {
   display: block;
   width: 100%;
   border-radius: 4px;
+  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
 }
 
 .album__container .album .album__info {

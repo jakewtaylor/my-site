@@ -1,13 +1,19 @@
 .card {
-    background: $white;
+    background: var(--white);
     width: 50rem;
     height: 22rem;
     display: flex;
-    box-shadow: 6px 6px 0 $black,
+    box-shadow: 6px 6px 0 var(--black),
                 6px 8px 15px rgba(0, 0, 0, 0.4);
 
-    .image {
-        height: 100%;
+    .image__container {
+        line-height: 0;
+        float: left;
+
+        .image {
+            height: 100%;
+            filter: grayscale(100%);
+        }
     }
 
     .card__inner {
@@ -31,7 +37,7 @@
 
             a {
                 @extend %font-bold;
-                color: $blue;
+                color: var(--primary);
                 text-decoration: none;
 
                 &:hover {
