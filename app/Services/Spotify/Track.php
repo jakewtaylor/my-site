@@ -3,19 +3,49 @@
 namespace App\Services\Spotify;
 
 use App\Token;
+use App\Palette;
 use App\Contracts\CurrentTrack;
 use App\Contracts\SpotifyAuth;
+use ColorThief\ColorThief;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Track implements CurrentTrack {
+    /**
+     * Flag to know if the track was retrieved or not.
+     *
+     * @var boolean
+     */
     protected $failed = false;
 
+    /**
+     * The Guzzle HTTP Client.
+     *
+     * @var Client
+     */
     protected $client;
 
+    /**
+     * The current track.
+     *
+     * @var \stdObject
+     */
+    protected $track;
+
+    /**
+     * The color palette for the current album.
+     *
+     * @var \stdObject
+     */
+    protected $palette;
+
+    /**
+     * Constructs the class.
+     *
+     * @param SpotifyAuth $auth
+     */
     public function __construct (SpotifyAuth $auth) {
         $this->client = new Client();
-
 
         try {
             $res = $this->getTrack();
@@ -36,8 +66,15 @@ class Track implements CurrentTrack {
         }
 
         $this->track = json_decode($res->getBody()->getContents());
+
+        $this->palette = $this->loadPalette();
     }
 
+    /**
+     * Loads the current track from the Spotify API.
+     *
+     * @return mixed The guzzle response
+     */
     protected function getTrack()
     {
         $token = Token::spotify('access_token');
@@ -49,11 +86,67 @@ class Track implements CurrentTrack {
         ]);
     }
 
+    /**
+     * Loads or creates the color palette for the album.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected function loadPalette()
+    {
+        $albumId = $this->track->item->album->id;
+        $albumArtUrl = $this->getAlbumArt();
+
+        $palette = Palette::forAlbum($albumId);
+
+        if (!$palette) {
+            $path = storage_path("albums/$albumId.jpg");
+            try {
+                $this->client->get($albumArtUrl, [
+                    'sink' => $path,
+                ]);
+
+                $colorPalette = ColorThief::getPalette($path);
+
+                $palette = Palette::create([
+                    'album_id' => $albumId,
+                    'album_art_url' => $albumArtUrl,
+                    'palette' => $colorPalette,
+                ]);
+
+                unlink($path);
+            } catch (\Exception $e) {
+                dd($e);
+            }
+        }
+
+        return $palette->palette;
+    }
+
+    /**
+     * Gets the color palette.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getPalette()
+    {
+        return $this->palette;
+    }
+
+    /**
+     * Determines if there is a track set.
+     *
+     * @return boolean
+     */
     public function hasTrack(): bool
     {
         return !$this->failed && $this->track && $this->track->is_playing;
     }
 
+    /**
+     * Gets a URL to the album art.
+     *
+     * @return string
+     */
     public function getAlbumArt(): string
     {
         $images = $this->track->item->album->images;
@@ -65,11 +158,21 @@ class Track implements CurrentTrack {
         return $images[0]->url;
     }
 
+    /**
+     * Gets the track name.
+     *
+     * @return string
+     */
     public function getTrackName(): string
     {
         return $this->track->item->name;
     }
 
+    /**
+     * Gets the artist name.
+     *
+     * @return string
+     */
     public function getArtistName(): string
     {
         $artists = $this->track->item->artists;
@@ -81,6 +184,11 @@ class Track implements CurrentTrack {
         return implode(', ', $artists);
     }
 
+    /**
+     * Gets the album name.
+     *
+     * @return string
+     */
     public function getAlbumName(): string
     {
         return $this->track->item->album->name;

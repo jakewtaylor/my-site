@@ -1,15 +1,31 @@
+/**
+ * CSS Helper class.
+ */
 class Css {
+    /**
+     * Gets the :root element.
+     */
     constructor () {
         this.el = document.documentElement;
-        this.style = getComputedStyle(this.el);
     }
 
+    /**
+     * Updates a variable.
+     *
+     * @param {string} key
+     * @param {string} val
+     */
     set (key, val) {
         this.el.style.setProperty(`--${key}`, val);
     }
 
+    /**
+     * Gets a variable.
+     *
+     * @param {string} key
+     */
     get (key) {
-        return this.style.getPropertyValue(`--${key}`);
+        return getComputedStyle(this.el).getPropertyValue(`--${key}`);
     }
 }
 

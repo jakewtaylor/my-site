@@ -2,16 +2,20 @@
     background: var(--white);
     width: 50rem;
     height: 22rem;
-    display: flex;
     box-shadow: 6px 6px 0 var(--black),
                 6px 8px 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: stretch;
 
     .image__container {
-        line-height: 0;
-        float: left;
+        background: var(--complementary);
+        height: 100%;
+        flex-grow: 0;
 
         .image {
+            display: block;
             height: 100%;
+            mix-blend-mode: multiply;
             filter: grayscale(100%);
         }
     }
@@ -19,6 +23,7 @@
     .card__inner {
         padding: 1rem;
         padding-top: 0;
+        flex-grow: 1;
 
         .card__title {
             @extend %font-bold-italic;

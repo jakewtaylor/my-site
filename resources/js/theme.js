@@ -1,27 +1,46 @@
-import axios from 'axios';
 import tinycolor from 'tinycolor2';
 
 import Css from './Css';
 
 (() => {
-    const albumArt = document.getElementById('album__art');
+    // Create CSS Helper
     const css = new Css();
 
-    axios.get(`/api/image/color-palette?image_url=${albumArt.src}`)
-        .then(({ data }) => {
-            const { palette } = data;
-            const colors = palette.map(([r, g, b]) => tinycolor({ r, g, b}));
+    // Get the album color palette
+    const { palette } = window;
 
-            let newBackgroundColor = colors[0];
-            let currentTextColor = tinycolor(css.get('contrasting'));
+    // Convert the colors to tinycolor instances
+    const colors = palette.map(([r, g, b]) => tinycolor({ r, g, b}));
 
-            if (!tinycolor.isReadable(newBackgroundColor, currentTextColor)) {
-                css.set('contrasting', css.get('white'));
-            }
+    // Determine which color to use for the background
+    const newBackgroundColor = getNicest(colors);
 
-            css.set('background', newBackgroundColor.toRgbString());
-        })
-        .catch((err) => {
-            console.dir(err);
-        })
+    // Get the current text color (outside of the card)
+    const currentTextColor = tinycolor(css.get('contrasting'));
+
+    // If the text won't be readable, switch the text from black to white.
+    if (!tinycolor.isReadable(newBackgroundColor, currentTextColor)) {
+        css.set('contrasting', css.get('white'));
+    }
+
+    // Update the theme colors
+    css.set('background', newBackgroundColor.toRgbString());
+    css.set('complementary', newBackgroundColor.complement().toRgbString());
 })();
+
+/**
+ * Gets the most saturated color from an array of colors.
+ * Probably a better way to determine which color to use, but this seems to work ok.
+ *
+ * @param {tinycolor} colors
+ */
+function getNicest (colors) {
+    const sorted = colors.sort((a, b) => {
+        const aSaturation = a.toHsl().s;
+        const bSaturation = b.toHsl().s;
+
+        return aSaturation < bSaturation;
+    });
+
+    return sorted[0];
+}
