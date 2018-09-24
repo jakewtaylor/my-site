@@ -1,22 +1,52 @@
+$mobile: 700px;
+
 .card {
     background: var(--white);
-    width: 50rem;
-    height: 22rem;
+    width: 95%;
+    height: 95%;
+    max-width: 50rem;
+    max-height: 22rem;
     box-shadow: 6px 6px 0 var(--black),
                 6px 8px 15px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: stretch;
+
+    @media (max-width: $mobile) {
+        flex-direction: column;
+        max-width: 90%;
+        max-height: 60%;
+    }
 
     .image__container {
         background: var(--complementary);
         height: 100%;
         flex-grow: 0;
 
+        @media (max-width: $mobile) {
+            height: auto;
+            width: 100%;
+        }
+
         .image {
             display: block;
-            height: 100%;
             mix-blend-mode: multiply;
             filter: grayscale(100%);
+
+            &.desktop {
+                height: 100%;
+
+                @media (max-width: $mobile) {
+                    display: none;
+                }
+            }
+
+            &.mobile {
+                width: 100%;
+
+                @media (min-width: $mobile + 1) {
+                    display: none;
+                }
+            }
         }
     }
 
@@ -29,8 +59,13 @@
             @extend %font-bold-italic;
             font-size: 3.5rem;
             line-height: 1.5;
-
             margin-bottom: 1rem;
+            whitespace: nowrap;
+
+            @media (max-width: $mobile) {
+                font-size: 2.5rem;
+                margin-bottom: 0.3rem;
+            }
         }
 
         .card__content {

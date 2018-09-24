@@ -3,7 +3,8 @@
 @section('content')
     <section class="card">
         <div class="image__container">
-            <img src="/img/plant.jpg" alt="Plant" class="image">
+            <img src="/img/plant.jpg" alt="A picture of a plant." class="image desktop">
+            <img src="/img/plant2.jpg" alt="An alternative picture of a plant for mobile." class="image mobile">
         </div>
 
         <div class="card__inner">
