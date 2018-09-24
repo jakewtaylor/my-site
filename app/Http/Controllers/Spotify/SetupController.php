@@ -22,7 +22,7 @@ class SetupController extends Controller {
         $passcode = $request->get('passcode');
 
         if ($passcode !== env('PASSCODE')) {
-            return redirect('/');
+            abort(404);
         }
 
         $params = $this->getAuthQueryParams();
