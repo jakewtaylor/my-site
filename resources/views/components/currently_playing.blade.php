@@ -20,8 +20,10 @@
         </div>
     </div>
 
-    <script>
-        window.palette = {{ $currentlyPlaying->getPalette()->toJson() }};
-    </script>
-    <script src="/js/theme.js"></script>
+    @if ($currentlyPlaying->hasPalette())
+        <script>
+            window.palette = {{ $currentlyPlaying->getPalette()->toJson() }};
+        </script>
+        <script src="/js/theme.js"></script>
+    @endif
 @endif

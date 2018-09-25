@@ -9,6 +9,7 @@ use App\Contracts\SpotifyAuth;
 use ColorThief\ColorThief;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Log;
 
 class Track implements CurrentTrack {
     /**
@@ -65,9 +66,32 @@ class Track implements CurrentTrack {
             }
         }
 
-        $this->track = json_decode($res->getBody()->getContents());
+        $contents = $res->getBody()->getContents();
 
-        $this->palette = $this->loadPalette();
+        if ($contents) {
+            $this->track = json_decode($contents);
+            $this->palette = $this->loadPalette();
+        }
+    }
+
+    /**
+     * Determines if there is a track set.
+     *
+     * @return boolean
+     */
+    public function hasTrack(): bool
+    {
+        return !$this->failed && $this->track && $this->track->is_playing;
+    }
+
+    /**
+     * Determines if there is a palette set.
+     *
+     * @return boolean
+     */
+    public function hasPalette(): bool
+    {
+        return !$this->failed && $this->palette;
     }
 
     /**
@@ -93,6 +117,10 @@ class Track implements CurrentTrack {
      */
     protected function loadPalette()
     {
+        Log::debug('Track::loadPalette()', [
+            'track' => $this->track,
+        ]);
+
         $albumId = $this->track->item->album->id;
         $albumArtUrl = $this->getAlbumArt();
 
@@ -130,16 +158,6 @@ class Track implements CurrentTrack {
     public function getPalette()
     {
         return $this->palette;
-    }
-
-    /**
-     * Determines if there is a track set.
-     *
-     * @return boolean
-     */
-    public function hasTrack(): bool
-    {
-        return !$this->failed && $this->track && $this->track->is_playing;
     }
 
     /**
