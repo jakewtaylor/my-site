@@ -5,3 +5,13 @@ body {
     justify-content: center;
     @include responsive(align-items, center, flex-start);
 }
+
+*::selection {
+    background: var(--complementary);
+    color: var(--contrasting);
+}
+
+*::-moz-selection {
+    backgorund: var(--complementary);
+    color: var(--contrasting);
+}
