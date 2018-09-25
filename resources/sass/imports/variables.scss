@@ -1,11 +1,23 @@
 :root {
+    // Page background color
     --background: #ffe6d1;
-    --contrasting: #4f4f4f;
-    --white: #ffffff;
-    --black: #4f4f4f;
-    --primary: #5c7aff;
+    // Complement to the background color
     --complementary: #cfd3ff;
+    // Color used for text on background
+    --contrasting: #4f4f4f;
+    // Color used for box shadow
+    --shadow: #4f4f4f;
+
+    // Constants
+    // White
+    --white: #ffffff;
+    // Black
+    --black: #4f4f4f;
+    // Primary (links)
+    --primary: #5c7aff;
 }
+
+$mobile: 700px;
 
 @import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i');
 
@@ -36,4 +48,12 @@
     @extend %font-space-mono;
     font-weight: 700;
     font-style: italic;
+}
+
+@mixin responsive ($property, $onDesktop, $onMobile) {
+    #{$property}: $onDesktop;
+
+    @media (max-width: $mobile) {
+        #{$property}: $onMobile;
+    }
 }

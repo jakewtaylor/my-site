@@ -1,20 +1,21 @@
-$mobile: 700px;
-
 .card {
     background: var(--white);
     width: 95%;
     height: 95%;
     max-width: 50rem;
     max-height: 22rem;
-    box-shadow: 6px 6px 0 var(--black),
+    box-shadow: 6px 6px 0 var(--shadow),
                 6px 8px 15px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: stretch;
 
     @media (max-width: $mobile) {
         flex-direction: column;
+        height: auto;
+        width: auto;
         max-width: 90%;
-        max-height: 60%;
+        max-height: 80%;
+        margin: 2em;
     }
 
     .image__container {
@@ -34,18 +35,12 @@ $mobile: 700px;
 
             &.desktop {
                 height: 100%;
-
-                @media (max-width: $mobile) {
-                    display: none;
-                }
+                @include responsive(display, block, none);
             }
 
             &.mobile {
                 width: 100%;
-
-                @media (min-width: $mobile + 1) {
-                    display: none;
-                }
+                @include responsive(display, none, block);
             }
         }
     }
@@ -61,11 +56,8 @@ $mobile: 700px;
             line-height: 1.5;
             margin-bottom: 1rem;
             whitespace: nowrap;
-
-            @media (max-width: $mobile) {
-                font-size: 2.5rem;
-                margin-bottom: 0.3rem;
-            }
+            @include responsive(font-size, 3.5rem, 2.5rem);
+            @include responsive(margin-bottom, 1rem, 0.3rem);
         }
 
         .card__content {

@@ -23,16 +23,24 @@ import Css from './Css';
         css.set('contrasting', css.get('white'));
     }
 
+    if (newBackgroundColor.isDark()) {
+        css.set('shadow', tinycolor(css.get('white')).setAlpha(0.2).toRgbString());
+    }
+
+    // Determine which color to use as the complementary
+    const complementary = getComplementary(newBackgroundColor);
+
     // Update the theme colors
     css.set('background', newBackgroundColor.toRgbString());
-    css.set('complementary', newBackgroundColor.complement().toRgbString());
+    css.set('complementary', complementary.toRgbString());
 })();
 
 /**
  * Gets the most saturated color from an array of colors.
  * Probably a better way to determine which color to use, but this seems to work ok.
  *
- * @param {tinycolor} colors
+ * @param {TinyColor[]} colors
+ * @returns {TinyColor}
  */
 function getNicest (colors) {
     const sorted = colors.sort((a, b) => {
@@ -43,4 +51,18 @@ function getNicest (colors) {
     });
 
     return sorted[0];
+}
+
+/**
+ * Determines the best color to use as the complementary.
+ *
+ * @param {TinyColor} color
+ * @returns {TinyColor}
+ */
+function getComplementary (color) {
+    const complementary = color.complement();
+
+    return complementary.getBrightness() < 30
+        ? complementary.brighten(50).saturate(50)
+        : complementary;
 }

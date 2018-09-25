@@ -5,10 +5,18 @@
     padding: 1rem;
     color: var(--contrasting);
 
+    @media (max-width: $mobile) {
+        top: auto;
+        bottom: 0;
+        padding: 0.75rem;
+        margin-bottom: -0.5rem;
+    }
+
     .album__title {
         @extend %font-normal;
         margin-bottom: 0.75rem;
-        font-size: 0.75rem;
+
+        @include responsive(font-size, 0.75rem, 0.65rem);
     }
 
     .album {
@@ -16,7 +24,7 @@
         align-items: center;
 
         .album__art__container {
-            width: 5em;
+            @include responsive(width, 5em, 3.5em);
 
             .album__art {
                 display: block;
@@ -29,8 +37,8 @@
         .album__info {
             display: inline-block;
             padding-left: 1rem;
-            font-size: 0.85rem;
             line-height: 1.5;
+            @include responsive(font-size, 0.85rem, 0.75rem);
 
             .album__song {
                 @extend %font-bold;
