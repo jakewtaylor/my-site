@@ -70,7 +70,10 @@ class Track implements CurrentTrack {
 
         if ($contents) {
             $this->track = json_decode($contents);
-            $this->palette = $this->loadPalette();
+
+            if ($this->track->item) {
+                $this->palette = $this->loadPalette();
+            }
         }
     }
 
@@ -81,7 +84,7 @@ class Track implements CurrentTrack {
      */
     public function hasTrack(): bool
     {
-        return !$this->failed && $this->track && $this->track->is_playing;
+        return !$this->failed && $this->track && $this->track->is_playing && $this->track->item;
     }
 
     /**
