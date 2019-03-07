@@ -26,7 +26,7 @@
                 >
 
                 <source
-                    srcset="/img/plant2.jpeg"
+                    srcset="/img/plant2.jpg"
                     type="image/jpeg"
                     alt="A picture of a plant,"
                     media="(max-width: 700px)"
