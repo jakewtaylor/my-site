@@ -3,8 +3,40 @@
 @section('content')
     <section class="card">
         <div class="image__container">
-            <img src="/img/plant.jpg" alt="A picture of a plant." class="image desktop">
-            <img src="/img/plant2.jpg" alt="An alternative picture of a plant for mobile." class="image mobile">
+            <picture class="image">
+                <source
+                    srcset="/img/plant.webp"
+                    type="image/webp"
+                    alt="A picture of a plant."
+                    media="(min-width: 700px)"
+                >
+
+                <source
+                    srcset="/img/plant.jpg"
+                    type="image/jpeg"
+                    alt="A picture of a plant."
+                    media="(min-width: 700px)"
+                >
+
+                <source
+                    srcset="/img/plant2.webp"
+                    type="image/webp"
+                    alt="A picture of a plant,"
+                    media="(max-width: 700px)"
+                >
+
+                <source
+                    srcset="/img/plant2.jpeg"
+                    type="image/jpeg"
+                    alt="A picture of a plant,"
+                    media="(max-width: 700px)"
+                >
+
+                <img
+                    src="/img/plant.jpg"
+                    alt="A picture of a plant."
+                >
+            </picture>
         </div>
 
         <div class="card__inner">

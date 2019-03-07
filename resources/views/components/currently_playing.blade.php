@@ -9,6 +9,7 @@
                     src="{{ $currentlyPlaying->getAlbumArt() }}"
                     class="album__art"
                     id="album__art"
+                    alt="Artwork for the album '{{ $currentlyPlaying->getAlbumName() }}' by {{ $currentlyPlaying->getArtistName() }}"
                 >
             </div>
 

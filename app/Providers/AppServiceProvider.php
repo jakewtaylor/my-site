@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('workplace', function () {
             $workplace = Workplace::current();
 
-            return "<a href=\"{$workplace->url}\" target=\"_blank\">{$workplace->company}</a>";
+            return "<a href=\"{$workplace->url}\" target=\"_blank\" rel=\"noopener\">{$workplace->company}</a>";
         });
 
         $this->app->bind(SpotifyAuth::class, Auth::class);

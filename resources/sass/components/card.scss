@@ -29,18 +29,15 @@
         }
 
         .image {
+            height: 100%;
             display: block;
             mix-blend-mode: multiply;
             filter: grayscale(100%);
 
-            &.desktop {
-                height: 100%;
-                @include responsive(display, block, none);
-            }
-
-            &.mobile {
-                width: 100%;
-                @include responsive(display, none, block);
+            img {
+                display: block;
+                @include responsive(width, auto, 100%);
+                @include responsive(height, 100%, auto);
             }
         }
     }
