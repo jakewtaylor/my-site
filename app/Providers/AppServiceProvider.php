@@ -22,12 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('age', function () {
-            $age = Carbon::createFromFormat('Y-m-d', env('DOB'))->age;
-
-            return $age;
-        });
-
         Blade::directive('workplace', function () {
             $workplace = Workplace::current();
 
