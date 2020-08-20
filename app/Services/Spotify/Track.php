@@ -11,7 +11,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Log;
 
-class Track implements CurrentTrack {
+class Track implements CurrentTrack
+{
     /**
      * Flag to know if the track was retrieved or not.
      *
@@ -45,13 +46,15 @@ class Track implements CurrentTrack {
      *
      * @param SpotifyAuth $auth
      */
-    public function __construct (SpotifyAuth $auth) {
+    public function __construct(SpotifyAuth $auth)
+    {
         $this->client = new Client();
 
         try {
             $res = $this->getTrack();
         } catch (RequestException $e) {
-            if ($e->getResponse()->getStatusCode() === 401) {
+            $res = $e->getResponse();
+            if ($res && $res->getStatusCode() === 401) {
                 $auth->refreshTokens();
 
                 try {

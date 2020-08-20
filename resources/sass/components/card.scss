@@ -1,13 +1,16 @@
 .card {
     background: var(--white);
-    width: 95%;
-    height: 95%;
-    max-width: 50rem;
-    max-height: 22rem;
-    box-shadow: 6px 6px 0 var(--shadow),
-                6px 8px 15px rgba(0, 0, 0, 0.4);
+    // width: 95%;
+    // height: 95%;
+    // max-width: 50rem;
+    // max-width: 30rem;
+    // max-height: 22rem;
+    // box-shadow: 6px 6px 0 var(--shadow),
+    //             6px 8px 15px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: stretch;
+    z-index: 2;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
 
     @media (max-width: $mobile) {
         flex-direction: column;
@@ -22,6 +25,7 @@
         background: var(--complementary);
         height: 100%;
         flex-grow: 0;
+        position: relative;
 
         @media (max-width: $mobile) {
             height: auto;
@@ -43,22 +47,28 @@
     }
 
     .card__inner {
-        padding: 1rem;
-        padding-top: 0;
+        padding: 2rem;
         flex-grow: 1;
 
         .card__title {
-            @extend %font-bold-italic;
+            @extend %font-inter;
+            font-weight: 900;
             font-size: 3.5rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            whitespace: nowrap;
+            line-height: 1;
+            letter-spacing: -2px;
+            white-space: nowrap;
             @include responsive(font-size, 3.5rem, 2.5rem);
-            @include responsive(margin-bottom, 1rem, 0.3rem);
         }
 
         .card__content {
-            @extend %font-normal;
+            @extend %font-inter;
+            font-weight: 400;
+
+            p {
+                line-height: 1;
+                letter-spacing: -1px;
+                font-size: 1.25rem;
+            }
 
             p:not(:last-of-type) {
                 margin-bottom: 0.75rem;
@@ -74,5 +84,25 @@
                 }
             }
         }
+    }
+}
+
+.heart-animation {
+    -webkit-animation: wobble .4s ease 0s 1 normal none;
+            animation: wobble .4s ease 0s 1 normal none;
+}
+
+/* Copy this @keyframes block to your CSS*/
+@keyframes wobble {
+    0%{}
+    100%{}
+    20%{
+        transform: scale(1.2);
+    }
+    40%{
+        transform: scale(1);
+    }
+    70%{
+        transform: scale(1.4);
     }
 }

@@ -39,6 +39,13 @@ class WorkplaceSeeder extends Seeder
                 'url' => 'http://johncatt.com',
                 'role' => 'Full-Stack Web Developer',
                 'started' => '2018-07-30',
+                'left' => '2019-10-27',
+            ],
+            [
+                'company' => 'Pickr',
+                'url' => 'http://pickr.works',
+                'role' => 'Frontend Web Developer',
+                'started' => '2019-10-30',
                 'left' => null,
             ],
         ];

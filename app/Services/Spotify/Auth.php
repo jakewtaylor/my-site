@@ -7,7 +7,8 @@ use App\Contracts\SpotifyAuth;
 use App\Services\Spotify\Traits\HasRedirectUri;
 use GuzzleHttp\Client;
 
-class Auth implements SpotifyAuth {
+class Auth implements SpotifyAuth
+{
     use HasRedirectUri;
 
     /**

@@ -9,7 +9,8 @@ use GuzzleHttp\Exception\RequestException;
 
 use Illuminate\Http\Request;
 
-class SetupController extends Controller {
+class SetupController extends Controller
+{
     use HasRedirectUri;
 
     /**
@@ -47,6 +48,7 @@ class SetupController extends Controller {
 
             return view('setup.done');
         } catch (RequestException $e) {
+            dd($e);
             return view('setup.retry');
         }
     }
