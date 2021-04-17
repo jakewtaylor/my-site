@@ -1,7 +1,7 @@
 @inject('currentlyPlaying', 'App\Contracts\CurrentTrack')
 
 @if ($currentlyPlaying->hasTrack())
-<div class="md:absolute bottom-0 md:bottom-auto md:top-0 left-0 p-4 z-20 text-gray-100">
+<div class="md:absolute bottom-0 md:bottom-auto md:top-0 left-0 p-4 md:p-8 z-20 text-gray-100">
     <p class="leading-none mb-2">i'm currently listening to</p>
     <div class="flex items-center">
         <div class="w-16 md:w-20">

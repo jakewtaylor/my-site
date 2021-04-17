@@ -16,7 +16,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="h-full bg-blue-800 py-8 md:py-0 flex flex-col justify-between md:justify-center items-center">
+<body
+    class="h-full bg-blue-800 py-4 md:py-0 flex flex-col justify-between md:justify-center items-start md:items-center">
     @yield('content')
 </body>
 
