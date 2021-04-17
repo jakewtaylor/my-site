@@ -171,9 +171,13 @@ class Track implements CurrentTrack
      *
      * @return string
      */
-    public function getAlbumArt(): string
+    public function getAlbumArt(): ?string
     {
         $images = $this->track->item->album->images;
+
+        if (count($images) < 1) {
+            return null;
+        }
 
         if (isset($images[1])) {
             return $images[1]->url;

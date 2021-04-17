@@ -1,4 +1,5 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
+const tailwind = require("tailwindcss");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +12,4 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.sass('resources/sass/style.scss', 'public/css')
-   .js('resources/js/theme.js', 'public/js')
-   .copyDirectory('resources/img', 'public/img');
+mix.postCss("resources/css/app.css", "public/css", [tailwind]);
