@@ -13,6 +13,4 @@
 
 Route::view('/', 'index');
 
-Route::get('/setup', 'Spotify\SetupController@setup')->name('setup');
-
-Route::get('/continue-setup', 'Spotify\SetupController@continue')->name('setup.continue');
+Route::view('/spotify-setup', 'setup.spotify-setup')->name('spotify-setup');

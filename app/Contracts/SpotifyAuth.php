@@ -2,6 +2,9 @@
 
 namespace App\Contracts;
 
-interface SpotifyAuth {
-    //
+interface SpotifyAuth
+{
+    public function getInitialTokens(string $code);
+
+    public function refreshTokens();
 }

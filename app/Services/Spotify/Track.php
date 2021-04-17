@@ -9,7 +9,7 @@ use App\Contracts\SpotifyAuth;
 use ColorThief\ColorThief;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class Track implements CurrentTrack
 {

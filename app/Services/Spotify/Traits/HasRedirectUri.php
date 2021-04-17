@@ -2,9 +2,10 @@
 
 namespace App\Services\Spotify\Traits;
 
-trait HasRedirectUri {
+trait HasRedirectUri
+{
     protected function getRedirectUri()
     {
-        return route('setup.continue');
+        return route('spotify-setup');
     }
 }
