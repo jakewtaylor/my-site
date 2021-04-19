@@ -74,7 +74,7 @@ class Track implements CurrentTrack
         if ($contents) {
             $this->track = json_decode($contents);
 
-            if ($this->track->item) {
+            if ($this->hasAlbumArt()) {
                 $this->palette = $this->loadPalette();
             }
         }
@@ -98,6 +98,16 @@ class Track implements CurrentTrack
     public function hasPalette(): bool
     {
         return !$this->failed && $this->palette;
+    }
+
+    /**
+     * Determines if album art is available.
+     * 
+     * @return boolean
+     */
+    public function hasAlbumArt(): bool
+    {
+        return $this->hasTrack() && count($this->track->item->album->images) > 0;
     }
 
     /**
@@ -173,11 +183,9 @@ class Track implements CurrentTrack
      */
     public function getAlbumArt(): ?string
     {
-        $images = $this->track->item->album->images;
+        if (!$this->hasAlbumArt()) return null;
 
-        if (count($images) < 1) {
-            return null;
-        }
+        $images = $this->track->item->album->images;
 
         if (isset($images[1])) {
             return $images[1]->url;
