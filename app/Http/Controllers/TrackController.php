@@ -11,7 +11,7 @@ class TrackController extends Controller
         $track = app(CurrentTrack::class);
 
         if (!$track->hasTrack()) {
-            return response()->json(null);
+            return response()->json(null)->header('Access-Control-Allow-Origin', '*');
         }
 
         return response()->json([
@@ -19,6 +19,6 @@ class TrackController extends Controller
             'album_name' => $track->getAlbumName(),
             'artist_name' => $track->getArtistName(),
             'track_name' => $track->getTrackName(),
-        ]);
+        ])->header('Access-Control-Allow-Origin', '*');
     }
 }
