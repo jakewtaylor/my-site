@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/track', TrackController::class);
+Route::get('/track', [TrackController::class, 'getTrack']);

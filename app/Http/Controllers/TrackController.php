@@ -6,7 +6,7 @@ use App\Contracts\CurrentTrack;
 
 class TrackController extends Controller
 {
-    public function __invoke()
+    public function getTrack()
     {
         $track = app(CurrentTrack::class);
 
