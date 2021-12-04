@@ -53,7 +53,9 @@ class Albums implements AlbumsContract
         }
 
         $contents = json_decode($res->getBody()->getContents());
-        $items = collect($contents->items)->map(fn ($item) => $item->album);
+        $items = collect($contents->items)->map(function ($item) {
+            return $item->album;
+        });
 
         $this->totalItems = $contents->total;
         $this->hasMore = !!$contents->next;
