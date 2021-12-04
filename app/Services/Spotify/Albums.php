@@ -28,12 +28,12 @@ class Albums implements AlbumsContract
      *
      * @param SpotifyAuth $auth
      */
-    public function __construct(SpotifyAuth $auth, int $page = 1)
+    public function __construct(SpotifyAuth $auth, int $page = 1, int $perPage = 50)
     {
         $this->client = new Client();
 
         try {
-            $res = $this->getAlbums($page);
+            $res = $this->getAlbums($page, $perPage);
         } catch (RequestException $e) {
             $res = $e->getResponse();
 
@@ -41,7 +41,7 @@ class Albums implements AlbumsContract
                 $auth->refreshTokens();
 
                 try {
-                    $res = $this->getAlbums($page);
+                    $res = $this->getAlbums($page, $perPage);
                 } catch (RequestException $e) {
                     $this->failed = true;
                     return;
@@ -67,7 +67,7 @@ class Albums implements AlbumsContract
      *
      * @return mixed The guzzle response
      */
-    protected function getAlbums(int $page = 1, int $perPage = 50)
+    protected function getAlbums(int $page, int $perPage)
     {
         if ($cached = $this->items) {
             return $cached;

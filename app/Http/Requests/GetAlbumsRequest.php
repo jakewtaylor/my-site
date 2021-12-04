@@ -20,6 +20,7 @@ class GetAlbumsRequest extends FormRequest
     {
         return [
             'page' => 'numeric|nullable',
+            'per_page' => 'numeric|nullable|max:50',
         ];
     }
 
@@ -30,5 +31,14 @@ class GetAlbumsRequest extends FormRequest
         if ($page) return intval($page);
 
         return 1;
+    }
+
+    public function getPerPage()
+    {
+        $perPage = $this->input('per_page');
+
+        if ($perPage) return intval($perPage);
+
+        return 50;
     }
 }

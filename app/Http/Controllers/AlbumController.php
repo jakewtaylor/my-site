@@ -11,15 +11,17 @@ class AlbumController extends Controller
     public function getAlbums(GetAlbumsRequest $request)
     {
         $page = $request->getPage();
+        $perPage = $request->getPerPage();
 
         $albums = app(Albums::class, [
             'page' => $page,
+            'perPage' => $perPage,
         ]);
 
         return new LengthAwarePaginator(
             $albums->items(),
             $albums->totalCount(),
-            50,
+            $perPage,
             $page,
             ['path' => '/api/albums']
         );
