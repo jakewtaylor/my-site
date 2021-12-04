@@ -21,7 +21,7 @@ class AlbumController extends Controller
             $albums->totalCount(),
             50,
             $page,
-            ['path' => '/api/albums'],
+            ['path' => '/api/albums']
         );
     }
 }
