@@ -13,6 +13,9 @@ use App\Services\Spotify\Auth;
 use App\Contracts\CurrentTrack;
 use App\Services\Spotify\Track;
 
+use App\Contracts\Albums as AlbumsContract;
+use App\Services\Spotify\Albums;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -30,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(SpotifyAuth::class, Auth::class);
         $this->app->bind(CurrentTrack::class, Track::class);
+        $this->app->bind(AlbumsContract::class, Albums::class);
     }
 
     /**

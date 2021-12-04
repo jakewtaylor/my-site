@@ -81,7 +81,7 @@ class SetupSpotify extends Command
             'client_id' => env('SPOTIFY_CLIENT_ID'),
             'response_type' => 'code',
             'redirect_uri' => $this->getRedirectUri(),
-            'scope' => 'user-read-currently-playing',
+            'scope' => 'user-read-currently-playing user-library-read',
         ];
     }
 
